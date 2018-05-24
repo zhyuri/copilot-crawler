@@ -5,10 +5,9 @@ phases:
       - aws cloudformation package --template-file samTemplate.yaml
                                    --s3-bucket copilot-lambda-east
                                    --output-template-file outputSamTemplate.yaml
-      - go get -u github.com/golang/dep/cmd/dep
-      - dep ensure
   build:
     commands:
+      - dep ensure
       - go build -o newGitRepo cmd/newGitRepo/main.go
 artifacts:
   type: zip
