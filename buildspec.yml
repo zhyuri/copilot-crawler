@@ -1,0 +1,21 @@
+version: 0.1
+phases:
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Compiling the Go code...
+      - go build -o newGitRepo cmd/newGitRepo/main.go
+  post_build:
+    commands:
+      - echo Build completed on `date`
+  install:
+    commands:
+      - aws cloudformation package --template-file samTemplate.yaml
+                                   --s3-bucket copilot-lambda-east
+                                   --output-template-file outputSamTemplate.yaml
+artifacts:
+  type: zip
+  files:
+    - newGitRepo
+    - samTemplate.yaml
+    - outputSamTemplate.yaml
