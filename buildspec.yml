@@ -2,14 +2,9 @@ version: 0.1
 phases:
   install:
     commands:
-      - env
       - aws cloudformation package --template-file samTemplate.yaml
                                    --s3-bucket copilot-lambda-east
                                    --output-template-file outputSamTemplate.yaml
-      - mkdir -p /go/src/github.com/zhyuri/
-      - cp -r $CODEBUILD_SRC_DIR /go/src/github.com/zhyuri/copilot-crawler
-      - cd /go/src/github.com/zhyuri/copilot-crawler
-          && dep ensure
   build:
     commands:
       - go build -o newGitRepo cmd/newGitRepo/main.go
