@@ -2,14 +2,10 @@ version: 0.1
 phases:
   install:
     commands:
+      - env
       - aws cloudformation package --template-file samTemplate.yaml
                                    --s3-bucket copilot-lambda-east
                                    --output-template-file outputSamTemplate.yaml
-      - mkdir -p /tmp/src
-      - mv * /tmp/src
-      - mkdir -p github.com/zhyuri/copilot-crawler
-      - mv /tmp/src* github.com/zhyuri/copilot-crawler
-      - cd github.com/zhyuri/copilot-crawler
       - dep ensure
   build:
     commands:
