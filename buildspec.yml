@@ -15,7 +15,6 @@ phases:
       - cd $TEMP_PROJECT_SRC
           && echo "    password ${GITHUB_TOKEN}" >> .netrc
           && ls -all
-#          && NETRC=.netrc
           && dep ensure
       - mv /go/src/tmp/vendor .
   build:
