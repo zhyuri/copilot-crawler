@@ -12,11 +12,8 @@ phases:
       - mkdir -p /go/src/github.com/zhyuri/
       - cp -r $CODEBUILD_SRC_DIR /go/src/github.com/zhyuri/copilot-crawler
       - cd /go/src/github.com/zhyuri/copilot-crawler
-          && echo "    password ${GITHUB_TOKEN}" >> .netrc
-          && ls -all
-          && NETRC=.netrc
           && dep ensure
-      - mv /go/src/tmp/vendor .
+      - mv /go/src/github.com/zhyuri/copilot-crawler/vendor .
   build:
     commands:
       - go build -o newGitRepo cmd/newGitRepo/main.go
