@@ -1,4 +1,7 @@
 version: 0.1
+env:
+  parameter-store:
+    GITHUB_TOKEN: "PARAM_GITHUB_TOKEN"
 phases:
   install:
     commands:
@@ -8,7 +11,10 @@ phases:
                                    --output-template-file outputSamTemplate.yaml
       - mkdir -p /go/src/tmp
       - cp -r * /go/src/tmp
-      - cd /go/src/tmp && dep ensure
+      - cd /go/src/tmp
+      - echo "    password ${GITHUB_TOKEN}" >> .netrc
+      - NETRC=.netrc && dep ensure
+      - cd $CODEBUILD_SRC_DIR
       - mv /go/src/tmp/vendor .
   build:
     commands:
