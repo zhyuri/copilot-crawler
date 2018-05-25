@@ -9,8 +9,7 @@ phases:
       - aws cloudformation package --template-file samTemplate.yaml
                                    --s3-bucket copilot-lambda-east
                                    --output-template-file outputSamTemplate.yaml
-      - mkdir -p /go/src/tmp
-      - cp -r * /go/src/tmp
+      - cp -r $CODEBUILD_SRC_DIR /go/src/tmp
       - cd /go/src/tmp
           && echo "    password ${GITHUB_TOKEN}" >> .netrc
           && cat .netrc
