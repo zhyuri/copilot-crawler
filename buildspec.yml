@@ -12,9 +12,10 @@ phases:
       - mkdir -p /go/src/tmp
       - cp -r * /go/src/tmp
       - cd /go/src/tmp
-      - echo "    password ${GITHUB_TOKEN}" >> .netrc
-      - NETRC=.netrc && dep ensure
-      - cd $CODEBUILD_SRC_DIR
+          && echo "    password ${GITHUB_TOKEN}" >> .netrc
+          && cat .netrc
+          && NETRC=.netrc
+          && dep ensure
       - mv /go/src/tmp/vendor .
   build:
     commands:
