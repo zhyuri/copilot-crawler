@@ -26,9 +26,9 @@ It has these top-level messages:
 */
 package log
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import "github.com/golang/protobuf/proto"
+import "fmt"
+import "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -253,9 +253,9 @@ func (m *RequestLog) Reset()         { *m = RequestLog{} }
 func (m *RequestLog) String() string { return proto.CompactTextString(m) }
 func (*RequestLog) ProtoMessage()    {}
 
-const Default_RequestLog_ModuleId string = "default"
+const Default_RequestLog_ModuleId = "default"
 const Default_RequestLog_ReplicaIndex int32 = -1
-const Default_RequestLog_Finished bool = true
+const Default_RequestLog_Finished = true
 
 func (m *RequestLog) GetAppId() string {
 	if m != nil && m.AppId != nil {
@@ -533,7 +533,7 @@ func (m *LogModuleVersion) Reset()         { *m = LogModuleVersion{} }
 func (m *LogModuleVersion) String() string { return proto.CompactTextString(m) }
 func (*LogModuleVersion) ProtoMessage()    {}
 
-const Default_LogModuleVersion_ModuleId string = "default"
+const Default_LogModuleVersion_ModuleId = "default"
 
 func (m *LogModuleVersion) GetModuleId() string {
 	if m != nil && m.ModuleId != nil {

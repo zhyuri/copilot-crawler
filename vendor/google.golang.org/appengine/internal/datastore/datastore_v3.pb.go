@@ -50,9 +50,9 @@ It has these top-level messages:
 */
 package datastore
 
-import proto "github.com/golang/protobuf/proto"
-import fmt "fmt"
-import math "math"
+import "github.com/golang/protobuf/proto"
+import "fmt"
+import "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -756,9 +756,9 @@ func (m *Property) Reset()         { *m = Property{} }
 func (m *Property) String() string { return proto.CompactTextString(m) }
 func (*Property) ProtoMessage()    {}
 
-const Default_Property_Meaning Property_Meaning = Property_NO_MEANING
-const Default_Property_Searchable bool = false
-const Default_Property_Locale string = "en"
+const Default_Property_Meaning = Property_NO_MEANING
+const Default_Property_Searchable = false
+const Default_Property_Locale = "en"
 
 func (m *Property) GetMeaning() Property_Meaning {
 	if m != nil && m.Meaning != nil {
@@ -1082,7 +1082,7 @@ func (m *Index_Property) Reset()         { *m = Index_Property{} }
 func (m *Index_Property) String() string { return proto.CompactTextString(m) }
 func (*Index_Property) ProtoMessage()    {}
 
-const Default_Index_Property_Direction Index_Property_Direction = Index_Property_ASCENDING
+const Default_Index_Property_Direction = Index_Property_ASCENDING
 
 func (m *Index_Property) GetName() string {
 	if m != nil && m.Name != nil {
@@ -1111,7 +1111,7 @@ func (m *CompositeIndex) Reset()         { *m = CompositeIndex{} }
 func (m *CompositeIndex) String() string { return proto.CompactTextString(m) }
 func (*CompositeIndex) ProtoMessage()    {}
 
-const Default_CompositeIndex_OnlyUseIfRequired bool = false
+const Default_CompositeIndex_OnlyUseIfRequired = false
 
 func (m *CompositeIndex) GetAppId() string {
 	if m != nil && m.AppId != nil {
@@ -1159,7 +1159,7 @@ func (m *IndexPostfix) Reset()         { *m = IndexPostfix{} }
 func (m *IndexPostfix) String() string { return proto.CompactTextString(m) }
 func (*IndexPostfix) ProtoMessage()    {}
 
-const Default_IndexPostfix_Before bool = true
+const Default_IndexPostfix_Before = true
 
 func (m *IndexPostfix) GetIndexValue() []*IndexPostfix_IndexValue {
 	if m != nil {
@@ -1216,7 +1216,7 @@ func (m *IndexPosition) Reset()         { *m = IndexPosition{} }
 func (m *IndexPosition) String() string { return proto.CompactTextString(m) }
 func (*IndexPosition) ProtoMessage()    {}
 
-const Default_IndexPosition_Before bool = true
+const Default_IndexPosition_Before = true
 
 func (m *IndexPosition) GetKey() string {
 	if m != nil && m.Key != nil {
@@ -1276,7 +1276,7 @@ func (m *Transaction) Reset()         { *m = Transaction{} }
 func (m *Transaction) String() string { return proto.CompactTextString(m) }
 func (*Transaction) ProtoMessage()    {}
 
-const Default_Transaction_MarkChanges bool = false
+const Default_Transaction_MarkChanges = false
 
 func (m *Transaction) GetHeader() *InternalHeader {
 	if m != nil {
@@ -1342,10 +1342,10 @@ func (m *Query) String() string { return proto.CompactTextString(m) }
 func (*Query) ProtoMessage()    {}
 
 const Default_Query_Offset int32 = 0
-const Default_Query_RequirePerfectPlan bool = false
-const Default_Query_KeysOnly bool = false
-const Default_Query_Compile bool = false
-const Default_Query_PersistOffset bool = false
+const Default_Query_RequirePerfectPlan = false
+const Default_Query_KeysOnly = false
+const Default_Query_Compile = false
+const Default_Query_PersistOffset = false
 
 func (m *Query) GetHeader() *InternalHeader {
 	if m != nil {
@@ -1570,7 +1570,7 @@ func (m *Query_Order) Reset()         { *m = Query_Order{} }
 func (m *Query_Order) String() string { return proto.CompactTextString(m) }
 func (*Query_Order) ProtoMessage()    {}
 
-const Default_Query_Order_Direction Query_Order_Direction = Query_Order_ASCENDING
+const Default_Query_Order_Direction = Query_Order_ASCENDING
 
 func (m *Query_Order) GetProperty() string {
 	if m != nil && m.Property != nil {
@@ -1751,7 +1751,7 @@ func (m *CompiledQuery_MergeJoinScan) Reset()         { *m = CompiledQuery_Merge
 func (m *CompiledQuery_MergeJoinScan) String() string { return proto.CompactTextString(m) }
 func (*CompiledQuery_MergeJoinScan) ProtoMessage()    {}
 
-const Default_CompiledQuery_MergeJoinScan_ValuePrefix bool = false
+const Default_CompiledQuery_MergeJoinScan_ValuePrefix = false
 
 func (m *CompiledQuery_MergeJoinScan) GetIndexName() string {
 	if m != nil && m.IndexName != nil {
@@ -1785,7 +1785,7 @@ func (m *CompiledQuery_EntityFilter) Reset()         { *m = CompiledQuery_Entity
 func (m *CompiledQuery_EntityFilter) String() string { return proto.CompactTextString(m) }
 func (*CompiledQuery_EntityFilter) ProtoMessage()    {}
 
-const Default_CompiledQuery_EntityFilter_Distinct bool = false
+const Default_CompiledQuery_EntityFilter_Distinct = false
 
 func (m *CompiledQuery_EntityFilter) GetDistinct() bool {
 	if m != nil && m.Distinct != nil {
@@ -1836,7 +1836,7 @@ func (m *CompiledCursor_Position) Reset()         { *m = CompiledCursor_Position
 func (m *CompiledCursor_Position) String() string { return proto.CompactTextString(m) }
 func (*CompiledCursor_Position) ProtoMessage()    {}
 
-const Default_CompiledCursor_Position_StartInclusive bool = true
+const Default_CompiledCursor_Position_StartInclusive = true
 
 func (m *CompiledCursor_Position) GetStartKey() string {
 	if m != nil && m.StartKey != nil {
@@ -2024,7 +2024,7 @@ func (m *GetRequest) Reset()         { *m = GetRequest{} }
 func (m *GetRequest) String() string { return proto.CompactTextString(m) }
 func (*GetRequest) ProtoMessage()    {}
 
-const Default_GetRequest_AllowDeferred bool = false
+const Default_GetRequest_AllowDeferred = false
 
 func (m *GetRequest) GetHeader() *InternalHeader {
 	if m != nil {
@@ -2079,7 +2079,7 @@ func (m *GetResponse) Reset()         { *m = GetResponse{} }
 func (m *GetResponse) String() string { return proto.CompactTextString(m) }
 func (*GetResponse) ProtoMessage()    {}
 
-const Default_GetResponse_InOrder bool = true
+const Default_GetResponse_InOrder = true
 
 func (m *GetResponse) GetEntity() []*GetResponse_Entity {
 	if m != nil {
@@ -2151,10 +2151,10 @@ func (m *PutRequest) Reset()         { *m = PutRequest{} }
 func (m *PutRequest) String() string { return proto.CompactTextString(m) }
 func (*PutRequest) ProtoMessage()    {}
 
-const Default_PutRequest_Trusted bool = false
-const Default_PutRequest_Force bool = false
-const Default_PutRequest_MarkChanges bool = false
-const Default_PutRequest_AutoIdPolicy PutRequest_AutoIdPolicy = PutRequest_CURRENT
+const Default_PutRequest_Trusted = false
+const Default_PutRequest_Force = false
+const Default_PutRequest_MarkChanges = false
+const Default_PutRequest_AutoIdPolicy = PutRequest_CURRENT
 
 func (m *PutRequest) GetHeader() *InternalHeader {
 	if m != nil {
@@ -2264,7 +2264,7 @@ func (m *TouchRequest) Reset()         { *m = TouchRequest{} }
 func (m *TouchRequest) String() string { return proto.CompactTextString(m) }
 func (*TouchRequest) ProtoMessage()    {}
 
-const Default_TouchRequest_Force bool = false
+const Default_TouchRequest_Force = false
 
 func (m *TouchRequest) GetHeader() *InternalHeader {
 	if m != nil {
@@ -2332,9 +2332,9 @@ func (m *DeleteRequest) Reset()         { *m = DeleteRequest{} }
 func (m *DeleteRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteRequest) ProtoMessage()    {}
 
-const Default_DeleteRequest_Trusted bool = false
-const Default_DeleteRequest_Force bool = false
-const Default_DeleteRequest_MarkChanges bool = false
+const Default_DeleteRequest_Trusted = false
+const Default_DeleteRequest_Force = false
+const Default_DeleteRequest_MarkChanges = false
 
 func (m *DeleteRequest) GetHeader() *InternalHeader {
 	if m != nil {
@@ -2423,7 +2423,7 @@ func (m *NextRequest) String() string { return proto.CompactTextString(m) }
 func (*NextRequest) ProtoMessage()    {}
 
 const Default_NextRequest_Offset int32 = 0
-const Default_NextRequest_Compile bool = false
+const Default_NextRequest_Compile = false
 
 func (m *NextRequest) GetHeader() *InternalHeader {
 	if m != nil {
@@ -2703,7 +2703,7 @@ func (m *BeginTransactionRequest) Reset()         { *m = BeginTransactionRequest
 func (m *BeginTransactionRequest) String() string { return proto.CompactTextString(m) }
 func (*BeginTransactionRequest) ProtoMessage()    {}
 
-const Default_BeginTransactionRequest_AllowMultipleEg bool = false
+const Default_BeginTransactionRequest_AllowMultipleEg = false
 
 func (m *BeginTransactionRequest) GetHeader() *InternalHeader {
 	if m != nil {

@@ -1098,14 +1098,14 @@ func sizeVarintS64PackedSlice(ptr pointer, tagsize int) int {
 }
 func sizeZigzag32Value(ptr pointer, tagsize int) int {
 	v := *ptr.toInt32()
-	return SizeVarint(uint64((uint32(v)<<1)^uint32((int32(v)>>31)))) + tagsize
+	return SizeVarint(uint64((uint32(v)<<1)^uint32(int32(v)>>31))) + tagsize
 }
 func sizeZigzag32ValueNoZero(ptr pointer, tagsize int) int {
 	v := *ptr.toInt32()
 	if v == 0 {
 		return 0
 	}
-	return SizeVarint(uint64((uint32(v)<<1)^uint32((int32(v)>>31)))) + tagsize
+	return SizeVarint(uint64((uint32(v)<<1)^uint32(int32(v)>>31))) + tagsize
 }
 func sizeZigzag32Ptr(ptr pointer, tagsize int) int {
 	p := ptr.getInt32Ptr()
@@ -1113,13 +1113,13 @@ func sizeZigzag32Ptr(ptr pointer, tagsize int) int {
 		return 0
 	}
 	v := *p
-	return SizeVarint(uint64((uint32(v)<<1)^uint32((int32(v)>>31)))) + tagsize
+	return SizeVarint(uint64((uint32(v)<<1)^uint32(int32(v)>>31))) + tagsize
 }
 func sizeZigzag32Slice(ptr pointer, tagsize int) int {
 	s := ptr.getInt32Slice()
 	n := 0
 	for _, v := range s {
-		n += SizeVarint(uint64((uint32(v)<<1)^uint32((int32(v)>>31)))) + tagsize
+		n += SizeVarint(uint64((uint32(v)<<1)^uint32(int32(v)>>31))) + tagsize
 	}
 	return n
 }
@@ -1130,20 +1130,20 @@ func sizeZigzag32PackedSlice(ptr pointer, tagsize int) int {
 	}
 	n := 0
 	for _, v := range s {
-		n += SizeVarint(uint64((uint32(v) << 1) ^ uint32((int32(v) >> 31))))
+		n += SizeVarint(uint64((uint32(v) << 1) ^ uint32(int32(v)>>31)))
 	}
 	return n + SizeVarint(uint64(n)) + tagsize
 }
 func sizeZigzag64Value(ptr pointer, tagsize int) int {
 	v := *ptr.toInt64()
-	return SizeVarint(uint64(v<<1)^uint64((int64(v)>>63))) + tagsize
+	return SizeVarint(uint64(v<<1)^uint64(int64(v)>>63)) + tagsize
 }
 func sizeZigzag64ValueNoZero(ptr pointer, tagsize int) int {
 	v := *ptr.toInt64()
 	if v == 0 {
 		return 0
 	}
-	return SizeVarint(uint64(v<<1)^uint64((int64(v)>>63))) + tagsize
+	return SizeVarint(uint64(v<<1)^uint64(int64(v)>>63)) + tagsize
 }
 func sizeZigzag64Ptr(ptr pointer, tagsize int) int {
 	p := *ptr.toInt64Ptr()
@@ -1151,13 +1151,13 @@ func sizeZigzag64Ptr(ptr pointer, tagsize int) int {
 		return 0
 	}
 	v := *p
-	return SizeVarint(uint64(v<<1)^uint64((int64(v)>>63))) + tagsize
+	return SizeVarint(uint64(v<<1)^uint64(int64(v)>>63)) + tagsize
 }
 func sizeZigzag64Slice(ptr pointer, tagsize int) int {
 	s := *ptr.toInt64Slice()
 	n := 0
 	for _, v := range s {
-		n += SizeVarint(uint64(v<<1)^uint64((int64(v)>>63))) + tagsize
+		n += SizeVarint(uint64(v<<1)^uint64(int64(v)>>63)) + tagsize
 	}
 	return n
 }
@@ -1168,7 +1168,7 @@ func sizeZigzag64PackedSlice(ptr pointer, tagsize int) int {
 	}
 	n := 0
 	for _, v := range s {
-		n += SizeVarint(uint64(v<<1) ^ uint64((int64(v) >> 63)))
+		n += SizeVarint(uint64(v<<1) ^ uint64(int64(v)>>63))
 	}
 	return n + SizeVarint(uint64(n)) + tagsize
 }
@@ -1824,7 +1824,7 @@ func appendVarintS64PackedSlice(b []byte, ptr pointer, wiretag uint64, _ bool) (
 func appendZigzag32Value(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
 	v := *ptr.toInt32()
 	b = appendVarint(b, wiretag)
-	b = appendVarint(b, uint64((uint32(v)<<1)^uint32((int32(v)>>31))))
+	b = appendVarint(b, uint64((uint32(v)<<1)^uint32(int32(v)>>31)))
 	return b, nil
 }
 func appendZigzag32ValueNoZero(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
@@ -1833,7 +1833,7 @@ func appendZigzag32ValueNoZero(b []byte, ptr pointer, wiretag uint64, _ bool) ([
 		return b, nil
 	}
 	b = appendVarint(b, wiretag)
-	b = appendVarint(b, uint64((uint32(v)<<1)^uint32((int32(v)>>31))))
+	b = appendVarint(b, uint64((uint32(v)<<1)^uint32(int32(v)>>31)))
 	return b, nil
 }
 func appendZigzag32Ptr(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
@@ -1843,14 +1843,14 @@ func appendZigzag32Ptr(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, e
 	}
 	b = appendVarint(b, wiretag)
 	v := *p
-	b = appendVarint(b, uint64((uint32(v)<<1)^uint32((int32(v)>>31))))
+	b = appendVarint(b, uint64((uint32(v)<<1)^uint32(int32(v)>>31)))
 	return b, nil
 }
 func appendZigzag32Slice(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
 	s := ptr.getInt32Slice()
 	for _, v := range s {
 		b = appendVarint(b, wiretag)
-		b = appendVarint(b, uint64((uint32(v)<<1)^uint32((int32(v)>>31))))
+		b = appendVarint(b, uint64((uint32(v)<<1)^uint32(int32(v)>>31)))
 	}
 	return b, nil
 }
@@ -1863,18 +1863,18 @@ func appendZigzag32PackedSlice(b []byte, ptr pointer, wiretag uint64, _ bool) ([
 	// compute size
 	n := 0
 	for _, v := range s {
-		n += SizeVarint(uint64((uint32(v) << 1) ^ uint32((int32(v) >> 31))))
+		n += SizeVarint(uint64((uint32(v) << 1) ^ uint32(int32(v)>>31)))
 	}
 	b = appendVarint(b, uint64(n))
 	for _, v := range s {
-		b = appendVarint(b, uint64((uint32(v)<<1)^uint32((int32(v)>>31))))
+		b = appendVarint(b, uint64((uint32(v)<<1)^uint32(int32(v)>>31)))
 	}
 	return b, nil
 }
 func appendZigzag64Value(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
 	v := *ptr.toInt64()
 	b = appendVarint(b, wiretag)
-	b = appendVarint(b, uint64(v<<1)^uint64((int64(v)>>63)))
+	b = appendVarint(b, uint64(v<<1)^uint64(int64(v)>>63))
 	return b, nil
 }
 func appendZigzag64ValueNoZero(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
@@ -1883,7 +1883,7 @@ func appendZigzag64ValueNoZero(b []byte, ptr pointer, wiretag uint64, _ bool) ([
 		return b, nil
 	}
 	b = appendVarint(b, wiretag)
-	b = appendVarint(b, uint64(v<<1)^uint64((int64(v)>>63)))
+	b = appendVarint(b, uint64(v<<1)^uint64(int64(v)>>63))
 	return b, nil
 }
 func appendZigzag64Ptr(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
@@ -1893,14 +1893,14 @@ func appendZigzag64Ptr(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, e
 	}
 	b = appendVarint(b, wiretag)
 	v := *p
-	b = appendVarint(b, uint64(v<<1)^uint64((int64(v)>>63)))
+	b = appendVarint(b, uint64(v<<1)^uint64(int64(v)>>63))
 	return b, nil
 }
 func appendZigzag64Slice(b []byte, ptr pointer, wiretag uint64, _ bool) ([]byte, error) {
 	s := *ptr.toInt64Slice()
 	for _, v := range s {
 		b = appendVarint(b, wiretag)
-		b = appendVarint(b, uint64(v<<1)^uint64((int64(v)>>63)))
+		b = appendVarint(b, uint64(v<<1)^uint64(int64(v)>>63))
 	}
 	return b, nil
 }
@@ -1913,11 +1913,11 @@ func appendZigzag64PackedSlice(b []byte, ptr pointer, wiretag uint64, _ bool) ([
 	// compute size
 	n := 0
 	for _, v := range s {
-		n += SizeVarint(uint64(v<<1) ^ uint64((int64(v) >> 63)))
+		n += SizeVarint(uint64(v<<1) ^ uint64(int64(v)>>63))
 	}
 	b = appendVarint(b, uint64(n))
 	for _, v := range s {
-		b = appendVarint(b, uint64(v<<1)^uint64((int64(v)>>63)))
+		b = appendVarint(b, uint64(v<<1)^uint64(int64(v)>>63))
 	}
 	return b, nil
 }

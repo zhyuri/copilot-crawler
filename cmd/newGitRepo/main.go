@@ -1,12 +1,12 @@
 package main
 
 import (
-	"../../lib"
 	"context"
 	"encoding/json"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/op/go-logging"
+	"github.com/zhyuri/copilot-crawler/lib"
 )
 
 var log *logging.Logger
