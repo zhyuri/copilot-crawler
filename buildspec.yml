@@ -1,7 +1,5 @@
 version: 0.1
 env:
-  variables:
-    TEMP_PROJECT_SRC: "/go/src/github.com/zhyuri/copilot-crawler"
   parameter-store:
     GITHUB_TOKEN: "PARAM_GITHUB_TOKEN"
 phases:
@@ -11,10 +9,11 @@ phases:
       - aws cloudformation package --template-file samTemplate.yaml
                                    --s3-bucket copilot-lambda-east
                                    --output-template-file outputSamTemplate.yaml
-      - cp -r $CODEBUILD_SRC_DIR $TEMP_PROJECT_SRC
-      - cd $TEMP_PROJECT_SRC
+      - cp -r $CODEBUILD_SRC_DIR /go/src/github.com/zhyuri/copilot-crawler
+      - cd /go/src/github.com/zhyuri/copilot-crawler
           && echo "    password ${GITHUB_TOKEN}" >> .netrc
           && ls -all
+          && NETRC=.netrc
           && dep ensure
       - mv /go/src/tmp/vendor .
   build:
