@@ -1,7 +1,4 @@
 version: 0.1
-env:
-  parameter-store:
-    GITHUB_TOKEN: "PARAM_GITHUB_TOKEN"
 phases:
   install:
     commands:
@@ -13,7 +10,6 @@ phases:
       - cp -r $CODEBUILD_SRC_DIR /go/src/github.com/zhyuri/copilot-crawler
       - cd /go/src/github.com/zhyuri/copilot-crawler
           && dep ensure
-      - mv /go/src/github.com/zhyuri/copilot-crawler/vendor .
   build:
     commands:
       - go build -o newGitRepo cmd/newGitRepo/main.go
