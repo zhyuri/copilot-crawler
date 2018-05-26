@@ -15,9 +15,9 @@ It has these top-level messages:
 */
 package urlfetch
 
-import "github.com/golang/protobuf/proto"
-import "fmt"
-import "math"
+import proto "github.com/golang/protobuf/proto"
+import fmt "fmt"
+import math "math"
 
 // Reference imports to suppress errors if they are not otherwise used.
 var _ = proto.Marshal
@@ -158,8 +158,8 @@ func (m *URLFetchRequest) Reset()         { *m = URLFetchRequest{} }
 func (m *URLFetchRequest) String() string { return proto.CompactTextString(m) }
 func (*URLFetchRequest) ProtoMessage()    {}
 
-const Default_URLFetchRequest_FollowRedirects = true
-const Default_URLFetchRequest_MustValidateServerCertificate = true
+const Default_URLFetchRequest_FollowRedirects bool = true
+const Default_URLFetchRequest_MustValidateServerCertificate bool = true
 
 func (m *URLFetchRequest) GetMethod() URLFetchRequest_RequestMethod {
 	if m != nil && m.Method != nil {
@@ -252,7 +252,7 @@ func (m *URLFetchResponse) Reset()         { *m = URLFetchResponse{} }
 func (m *URLFetchResponse) String() string { return proto.CompactTextString(m) }
 func (*URLFetchResponse) ProtoMessage()    {}
 
-const Default_URLFetchResponse_ContentWasTruncated = false
+const Default_URLFetchResponse_ContentWasTruncated bool = false
 const Default_URLFetchResponse_ApiCpuMilliseconds int64 = 0
 const Default_URLFetchResponse_ApiBytesSent int64 = 0
 const Default_URLFetchResponse_ApiBytesReceived int64 = 0

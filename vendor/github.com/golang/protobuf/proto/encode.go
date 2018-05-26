@@ -170,7 +170,7 @@ func (p *Buffer) EncodeFixed32(x uint64) error {
 // This is the format used for the sint64 protocol buffer type.
 func (p *Buffer) EncodeZigzag64(x uint64) error {
 	// use signed number to get arithmetic right shift.
-	return p.EncodeVarint(uint64((x << 1) ^ uint64(int64(x)>>63)))
+	return p.EncodeVarint(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
 
 // EncodeZigzag32 writes a zigzag-encoded 32-bit integer
@@ -178,7 +178,7 @@ func (p *Buffer) EncodeZigzag64(x uint64) error {
 // This is the format used for the sint32 protocol buffer type.
 func (p *Buffer) EncodeZigzag32(x uint64) error {
 	// use signed number to get arithmetic right shift.
-	return p.EncodeVarint(uint64((uint32(x) << 1) ^ uint32(int32(x)>>31)))
+	return p.EncodeVarint(uint64((uint32(x) << 1) ^ uint32((int32(x) >> 31))))
 }
 
 // EncodeRawBytes writes a count-delimited byte buffer to the Buffer.

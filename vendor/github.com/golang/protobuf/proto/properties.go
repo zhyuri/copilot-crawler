@@ -46,7 +46,7 @@ import (
 	"sync"
 )
 
-const debug = false
+const debug bool = false
 
 // Constants that identify the encoding of a value on the wire.
 const (
