@@ -7,13 +7,16 @@ before_install:
 - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 install:
 - dep ensure
+script:
+- go build -o copilot.newGitRepo cmd/newGitRepo/main.go
+- go test -v ./...
 deploy:
   provider: lambda
   function_name: "copilot-crawler"
   region: "us-east-1"
   role: "arn:aws:iam::254074152624:role/service-role/lambda-copilot"
   runtime: "go1.x"
-  module_name: "main"
+  module_name: "copilot"
   handler_name: "newGitRepo"
   timeout: 60
   on:
