@@ -16,3 +16,5 @@ deploy:
   module_name: "main"
   handler_name: "newGitRepo"
   timeout: 60
+  on:
+    go: '1.10'
