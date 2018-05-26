@@ -11,8 +11,8 @@ deploy:
   provider: lambda
   function_name: "copilot-crawler"
   region: "us-east-1"
-  role: "arn:aws:iam::254074152624:role/cloudformation_lambda"
+  role: "arn:aws:iam::254074152624:role/service-role/lambda-copilot"
   runtime: "go1.x"
-  module_name: ""
-  handler_name: "handler"
+  module_name: "main"
+  handler_name: "newGitRepo"
   timeout: 60
