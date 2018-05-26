@@ -17,7 +17,9 @@ type NewRepoEvent struct {
 }
 
 func init() {
-	log = lib.Log
+	log = logging.MustGetLogger("cli-newGitRepo")
+	logging.SetLevel(logging.INFO, "newGitRepo")
+	logging.SetLevel(logging.INFO, "lib")
 }
 
 func handler(ctx context.Context, snsEvent events.SNSEvent) {

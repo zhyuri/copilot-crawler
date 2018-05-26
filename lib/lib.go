@@ -10,15 +10,11 @@ import (
 
 var log *logging.Logger
 
-// Log is exported for cli use
-var Log *logging.Logger
-
 func init() {
 	logging.SetFormatter(logging.MustStringFormatter(
 		`%{level:.4s} %{shortfile} %{callpath} ▶ %{message}`,
 	))
-	log = logging.MustGetLogger("copilot")
-	Log = log
+	log = logging.MustGetLogger("lib")
 }
 
 var githubClient *githubv4.Client
