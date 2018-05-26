@@ -16,21 +16,25 @@ type NewRepoEvent struct {
 	Owner string `json:"owner"`
 }
 
+func init() {
+	log = lib.Log
+}
+
 func handler(ctx context.Context, snsEvent events.SNSEvent) {
 	for _, record := range snsEvent.Records {
 		snsRecord := record.SNS
 
-		log.Infof("[%s %s] Message = %s \n", record.EventSource, snsRecord.Timestamp, snsRecord.Message)
+		log.Debugf("[%s %s] Message = %s \n", record.EventSource, snsRecord.Timestamp, snsRecord.Message)
 		var event NewRepoEvent
 		err := json.Unmarshal([]byte(snsRecord.Message), &event)
 		if err != nil {
-			log.Infof("error: %v", err)
+			log.Errorf("parse sns event json got error: %v", err)
 			continue
 		}
-		log.Infof("get new repo name: %s", event.Name)
+		log.Debugf("get new repo name: %s of owner %s", event.Name, event.Owner)
 		repo, err := lib.NewGithubRepo(event.Name, event.Owner)
 		if err != nil {
-			log.Warningf("cannot fetch new repo %s, got err %s", event.Name, err)
+			log.Errorf("cannot fetch new repo %s, got err %s", event.Name, err)
 			continue
 		}
 		log.Infof("get new repo %v", repo)
@@ -38,6 +42,5 @@ func handler(ctx context.Context, snsEvent events.SNSEvent) {
 }
 
 func main() {
-	log = lib.Log
 	lambda.Start(handler)
 }
