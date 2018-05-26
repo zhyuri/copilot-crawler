@@ -8,19 +8,15 @@ import (
 	"os"
 )
 
-var Log *logging.Logger
 var log *logging.Logger
-var logFormat = logging.MustStringFormatter(
-	`%{color} %{level:.4s} %{shortfile} %{callpath} ▶ %{color:reset} %{message}`,
-)
+
+// Log is exported for cli use
+var Log *logging.Logger
 
 func init() {
-
-	backend := logging.NewLogBackend(os.Stdout, "", 0)
-	backendFormatter := logging.NewBackendFormatter(backend, logFormat)
-	backendFormatted := logging.AddModuleLevel(backendFormatter)
-	logging.SetBackend(backend, backendFormatted)
-
+	logging.SetFormatter(logging.MustStringFormatter(
+		`%{level:.4s} %{shortfile} %{callpath} ▶ %{message}`,
+	))
 	log = logging.MustGetLogger("copilot")
 	Log = log
 }
