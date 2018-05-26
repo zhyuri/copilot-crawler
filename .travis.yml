@@ -13,5 +13,6 @@ deploy:
   region: "us-east-1"
   role: "arn:aws:iam::254074152624:role/cloudformation_lambda"
   runtime: "go1.x"
-  module_name: "newGitRepo"
+  module_name: ""
   handler_name: "handler"
+  timeout: 60
