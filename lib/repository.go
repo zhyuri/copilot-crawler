@@ -6,22 +6,18 @@ import (
 )
 
 type GithubRepo struct {
-	ID               githubv4.String
-	Name             githubv4.String
-	Login            githubv4.String
-	Bio              githubv4.String
-	DefaultBranchRef githubv4.String
-	AvatarURL        githubv4.URI
-	URL              githubv4.URI
-	WebsiteUrl       githubv4.URI
+	ID   githubv4.String
+	Name githubv4.String
+	URL  githubv4.URI
 }
 
-func NewGithubRepo(name string) (GithubRepo, error) {
+func NewGithubRepo(name string, owner string) (GithubRepo, error) {
 	var query struct {
-		GithubRepo `graphql:"repositoryinfo(login:$name)"`
+		GithubRepo `graphql:"repository(name:$name, owner:$owner)"`
 	}
 	param := map[string]interface{}{
-		"name": githubv4.String(name),
+		"name":  githubv4.String(name),
+		"owner": githubv4.String(owner),
 	}
 
 	err := client().Query(context.Background(), &query, param)

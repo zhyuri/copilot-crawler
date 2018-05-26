@@ -11,12 +11,9 @@ import (
 
 var log *logging.Logger
 
-func init() {
-	log = logging.MustGetLogger("copilot-repo")
-}
-
 type NewRepoEvent struct {
-	Name string `json:"name"`
+	Name  string `json:"name"`
+	Owner string `json:"owner"`
 }
 
 func handler(ctx context.Context, snsEvent events.SNSEvent) {
@@ -31,7 +28,7 @@ func handler(ctx context.Context, snsEvent events.SNSEvent) {
 			continue
 		}
 		log.Infof("get new repo name: %s", event.Name)
-		repo, err := lib.NewGithubRepo(event.Name)
+		repo, err := lib.NewGithubRepo(event.Name, event.Owner)
 		if err != nil {
 			log.Warningf("cannot fetch new repo %s, got err %s", event.Name, err)
 			continue
@@ -41,5 +38,6 @@ func handler(ctx context.Context, snsEvent events.SNSEvent) {
 }
 
 func main() {
+	log = lib.Log
 	lambda.Start(handler)
 }
